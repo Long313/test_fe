@@ -7,12 +7,15 @@ import Header from "../../components/Header";
 import arrow from "../../images/arrowRight.svg";
 import home from "../../images/home.svg";
 import { capitalizeFirstLetter } from "../../common/type";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 
 interface DetailType {
   category: string;
   brand: string;
   title: string;
   thumbnail: string;
+  images: string[];
 }
 
 export default function ProductDetail() {
@@ -40,7 +43,11 @@ export default function ProductDetail() {
   const handleGetParamsSearch = (searchParam: string) => {
     console.log("search", searchParam);
   };
-  console.log("Data", dataDetail);
+  const handleDragStart = () => {};
+  const items = dataDetail?.images.map((item: any) => {
+    return <img src={item} onDragStart={handleDragStart} role="presentation" />;
+  });
+
   return (
     <div>
       <Header onSearch={handleGetParamsSearch} />
@@ -66,7 +73,9 @@ export default function ProductDetail() {
         <h2>{capitalizeFirstLetter(dataDetail?.title)}</h2>
         <div className="container_infor">
           <div className="container_detail_left">
-            <img src={dataDetail?.thumbnail} alt="img" />
+            <div className="container_img_detail">
+              <AliceCarousel mouseTracking items={items} />
+            </div>
           </div>
           <div className="container_detail_right"></div>
         </div>
