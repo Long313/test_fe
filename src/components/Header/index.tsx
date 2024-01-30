@@ -17,7 +17,7 @@ export default function Header(props: HeaderType) {
     <div className="container_header">
       <div className="container_seach_field">
         <label htmlFor="search_input" className="label_seach_field">
-          Product
+          Search
         </label>
         <input
           id="search_input"

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ItemType } from "../../common/type";
+import { ItemType, capitalizeFirstLetter } from "../../common/type";
 import "./contentStyle.css";
 import Rating from "../Rating";
 import { FaHeart } from "react-icons/fa";
@@ -21,7 +21,7 @@ export default function Content(props: any) {
 
     setListLiked(newListLiked);
   };
-  const handleClickProduct = (id: number) => {};
+ 
   return (
     <div className="container_content">
       {data.length > 0 &&
@@ -38,7 +38,7 @@ export default function Content(props: any) {
                   <img src={item.thumbnail} alt="img-phone" className="img" />
                 </div>
                 <div className="container_text">
-                  <p className="title">{item.title}</p>
+                  <p className="title">{capitalizeFirstLetter(item.title)}</p>
                   <p className="price">{Math.floor(item.price)}$</p>
                 </div>
                 <div className="container_icon">

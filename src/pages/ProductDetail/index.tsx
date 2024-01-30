@@ -7,8 +7,8 @@ import Header from "../../components/Header";
 import arrow from "../../images/arrowRight.svg";
 import home from "../../images/home.svg";
 import { capitalizeFirstLetter } from "../../common/type";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
+import { toast } from "react-toastify";
+import { FaCartShopping } from "react-icons/fa6";
 
 interface DetailType {
   category: string;
@@ -16,6 +16,8 @@ interface DetailType {
   title: string;
   thumbnail: string;
   images: string[];
+  description: string;
+  price: number;
 }
 
 export default function ProductDetail() {
@@ -43,11 +45,20 @@ export default function ProductDetail() {
   const handleGetParamsSearch = (searchParam: string) => {
     console.log("search", searchParam);
   };
-  const handleDragStart = () => {};
-  const items = dataDetail?.images.map((item: any) => {
-    return <img src={item} onDragStart={handleDragStart} role="presentation" />;
-  });
 
+  const handleAddToCart = () => {
+    toast.success("Add product into cart success 🚀", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  console.log("detail", dataDetail);
   return (
     <div>
       <Header onSearch={handleGetParamsSearch} />
@@ -74,10 +85,23 @@ export default function ProductDetail() {
         <div className="container_infor">
           <div className="container_detail_left">
             <div className="container_img_detail">
-              <AliceCarousel mouseTracking items={items} />
+              <img src={dataDetail?.thumbnail} alt="img-product" />
             </div>
           </div>
-          <div className="container_detail_right"></div>
+          <div className="container_detail_right">
+            <button onClick={handleAddToCart} className="button_add">
+              <span className="text">ADD TO CART</span>
+              <div className="container_icon">
+                <FaCartShopping size={20}/>
+                <p className="add_icon">+</p>
+              </div>
+            </button>
+            <div className="container_infor_product">
+              <p className="title">Information Product</p>
+              <p className="desciption">{dataDetail?.description}</p>
+              <p className="price">{dataDetail?.price} $</p>
+            </div>
+          </div>
         </div>
       </div>
       ;

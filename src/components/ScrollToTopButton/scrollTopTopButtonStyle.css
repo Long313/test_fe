@@ -1,0 +1,13 @@
+.container_scroll_top_button {
+  position: fixed;
+  bottom: 100px;
+  right: 10px;
+  width: 100px;
+  height: 100px;
+}
+
+.container_scroll_top_button .scroll_to_top_button {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}

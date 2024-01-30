@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import logo from "./logo.svg";
 import "./homeStyle.css";
 import { Button } from "@mui/material";
 import { ItemType } from "../../common/type";
@@ -7,15 +6,20 @@ import { PRODUCTS_URL_API, SEARCH_PRODUCTS_URL_API } from "../../constants";
 import { getAllProduct, searchProduct } from "../../services/api";
 import Header from "../../components/Header";
 import Content from "../../components/Content/Content";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
+import { IoIosArrowUp } from "react-icons/io";
 
 function Home() {
   const [data, setData] = useState<ItemType[]>([]);
-  const [limit, setLimit] = useState<number>(10);
+  const [limit, setLimit] = useState<number>(5);
   const [skip, setSkip] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [paramsSearch, setParamsSearch] = useState<string>("");
   const [searchData, setSearchData] = useState<ItemType[]>([]);
-
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [showGoToTop, setShowGoToTop] = useState<boolean>(false);
   useEffect(() => {
     getListProduct();
   }, [limit]);
@@ -23,6 +27,7 @@ function Home() {
     try {
       const res = await getListAllProduct(PRODUCTS_URL_API, { limit, skip });
       setData(res.products);
+      setTotal(res.total);
     } catch (err: any) {
       throw new Error(err);
     }
@@ -60,7 +65,6 @@ function Home() {
 
   const getListSearchData = async (url: string, param: any) => {
     const res = await searchProduct(url, param);
-    console.log("res", res);
     return res.data.products;
   };
   useEffect(() => {
@@ -68,6 +72,23 @@ function Home() {
       setSearchData([]);
     }
   }, [paramsSearch]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowGoToTop(window.scrollY > 200);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Thêm hiệu ứng cuộn mượt
+    });
+  };
   return (
     <div className="App">
       <Header onSearch={handleGetParamsSearch} />
@@ -76,13 +97,48 @@ function Home() {
           <Content data={searchData} />
         ) : (
           <div>
-            <Content data={data} />
-            <div className="container_button">
-              <button onClick={handleLoadMore} className="button_loadmore">
-                Load More
-              </button>
-            </div>
+            <InfiniteScroll
+              dataLength={data.length}
+              next={handleLoadMore}
+              hasMore={hasMore}
+              loader={
+                <div className="load-wrapp">
+                  <div className="load-6">
+                    <div className="letter-holder">
+                      <div className="l-1 letter">L</div>
+                      <div className="l-2 letter">o</div>
+                      <div className="l-3 letter">a</div>
+                      <div className="l-4 letter">d</div>
+                      <div className="l-5 letter">i</div>
+                      <div className="l-6 letter">n</div>
+                      <div className="l-7 letter">g</div>
+                      <div className="l-8 letter">.</div>
+                      <div className="l-9 letter">.</div>
+                      <div className="l-10 letter">.</div>
+                    </div>
+                  </div>
+                </div>
+              }
+            >
+              <Content data={data} />
+            </InfiniteScroll>
           </div>
+        )}
+        {showGoToTop && (
+          <button
+            // style={{
+            //   position: "fixed",
+            //   right: 20,
+            //   bottom: 20
+            // }}
+            onClick={scrollToTop}
+            className="button_go_to_top"
+          >
+            <span>
+              <IoIosArrowUp size={20} />
+            </span>
+            <span>Go to top</span>
+          </button>
         )}
       </div>
     </div>
