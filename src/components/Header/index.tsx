@@ -3,11 +3,17 @@ import "./headerStyle.css";
 import useDebounce from "../../hooks/useDebounce";
 import { PRODUCTS_URL_API, SEARCH_PRODUCTS_URL_API } from "../../constants";
 import { getAllProduct } from "../../services/api";
-export default function Header() {
-  const [product, setProduct] = useState<string>("");
-  const productValue = useDebounce(product, 500);
-
-   return (
+interface HeaderType {
+  onSearch?: any;
+}
+export default function Header(props: HeaderType) {
+  const { onSearch } = props;
+  const [searchProduct, setSearchProduct] = useState<string>("");
+  const productValue = useDebounce(searchProduct, 100);
+  useEffect(() => {
+    onSearch(productValue);
+  }, [searchProduct]);
+  return (
     <div className="container_header">
       <div className="container_seach_field">
         <label htmlFor="search_input" className="label_seach_field">
@@ -18,7 +24,7 @@ export default function Header() {
           placeholder="Enter to search"
           value={productValue}
           onChange={(e) => {
-            setProduct(e.target.value);
+            setSearchProduct(e.target.value);
           }}
         />
       </div>

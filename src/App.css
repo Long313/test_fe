@@ -1,18 +1,24 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
-  
-  html {
-    width: 100%;
-    height: 100%;
-    font-size: 62.5%;
-  }
-  
-  body {
-    width: 100%;
-    height: 100%;
-    font-size: 1.6rem;
-    line-height: 1.5rem;
-  }
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 1.6rem;
+  line-height: 1.5rem;
+}
+
+a {
+  color: black;
+  display: inline-block;
+  text-decoration: none;
+}

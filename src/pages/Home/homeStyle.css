@@ -1,0 +1,26 @@
+.container {
+}
+
+.container_app .container_button {
+    margin-bottom: 10px;
+  }
+.container_button {
+  display: flex;
+  margin: 20px 0 20px 0;
+}
+
+.button_loadmore {
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  min-width: 100px;
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  border-radius: 4px;
+  opacity: 0.9;
+  margin: auto;
+}
+
+.button_loadmore:hover {
+  opacity: 1;
+}
