@@ -9,6 +9,7 @@ import Content from "../../components/Content/Content";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import { IoIosArrowUp } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [data, setData] = useState<ItemType[]>([]);
@@ -20,6 +21,7 @@ function Home() {
   const [searchData, setSearchData] = useState<ItemType[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(false);
   const [showGoToTop, setShowGoToTop] = useState<boolean>(false);
+  console.log("dâta", data);
   useEffect(() => {
     getListProduct();
   }, [limit]);
@@ -96,6 +98,25 @@ function Home() {
     <div className="App">
       <Header onSearch={handleGetParamsSearch} />
       <div className="container_app" ref={containerRef}>
+        <div className="container_home_left">
+          <ul>
+            <li><Link to="products/category/smartphones">Smartphone</Link></li>
+            <li><Link to="products/category/laptops">Laptop</Link></li>
+            <li><Link to="products/category/fragrances">Fragrances</Link></li>
+            <li><Link to="products/category/skincare">Skin care</Link></li>
+            <li><Link to="products/category/groceries">Groceries</Link></li>
+            <li><Link to="products/category/home-decoration">Home decoration</Link></li>
+            <li><Link to="products/category/furniture">Furniture</Link></li>
+            <li><Link to="products/category/womens-dresses">Women dress</Link></li>
+            <li><Link to="products/category/mens-shirts">Men shirt</Link></li>
+            <li><Link to="products/category/mens-shoes">Men shoes</Link></li>
+            <li><Link to="products/category/womens-watches">Women bag</Link></li>
+            <li><Link to="products/category/womens-jewellery">Women jewellery</Link></li>
+            <li><Link to="products/category/sunglasses">Sunglasses</Link></li>
+            <li><Link to="products/category/lighting">Lighting</Link></li>
+          </ul>
+        </div>
+        <div className="container_home_right">
         {paramsSearch && searchData?.length > 0 ? (
           <Content data={searchData} />
         ) : (
@@ -131,6 +152,7 @@ function Home() {
             </InfiniteScroll>
           </div>
         )}
+        </div>
         {showGoToTop && (
           <button
             // style={{

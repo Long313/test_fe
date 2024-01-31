@@ -4,6 +4,7 @@
   gap: 20px;
   justify-content: center;
   margin-top: calc(var(--height-header) + 10px);
+  margin-left: var(--margin-detail-page);
 }
 
 .container_content .container_item_infor {

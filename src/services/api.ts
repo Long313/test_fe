@@ -34,3 +34,12 @@ export const getOneProduct = (url: string, id: any) => {
 
   });
 };
+
+export const getListProductOfCategory = (url: string, param : any) => {
+  return api({
+    headers,
+    method: "GET",
+    url: `/${url}/${param}`,
+
+  });
+};

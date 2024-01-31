@@ -1,4 +1,16 @@
-.container {
+.container_app {
+  display: flex;
+}
+
+.container_app .container_home_left {
+  width: var(--width-side-bar);
+  position: fixed;
+  top: 100px;
+  left: 0;
+}
+
+.container_app .container_home_right {
+  width: 80%;
 }
 
 .container_app .container_button {

@@ -1,0 +1,7 @@
+.container_product_category .list_product_category {
+ margin-top: 1000px;
+ width: 100%;
+ height: fit-content;
+ display: flex;
+ flex-direction: row;
+}
