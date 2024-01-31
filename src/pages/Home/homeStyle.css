@@ -2,8 +2,8 @@
 }
 
 .container_app .container_button {
-    margin-bottom: 10px;
-  }
+  margin-bottom: 10px;
+}
 .container_button {
   display: flex;
   margin: 20px 0 20px 0;
@@ -25,7 +25,7 @@
   opacity: 1;
 }
 
-.infinite-scroll-component  {
+.infinite-scroll-component {
   overflow: unset !important;
 }
 
@@ -34,7 +34,7 @@
   right: 10px;
   bottom: 10px;
   cursor: pointer;
-  background-color: rgba(215,0,24,0.7);
+  background-color: rgba(215, 0, 24, 0.7);
   width: 64px;
   height: 64px;
   border-radius: 16px;
@@ -65,7 +65,7 @@
   border-radius: 5px;
   text-align: center;
   position: fixed;
-  bottom: 10px;
+  bottom: -40px;
   left: 50%;
   transform: translateX(-50%);
 }

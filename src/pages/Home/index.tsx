@@ -12,13 +12,13 @@ import { IoIosArrowUp } from "react-icons/io";
 
 function Home() {
   const [data, setData] = useState<ItemType[]>([]);
-  const [limit, setLimit] = useState<number>(5);
+  const [limit, setLimit] = useState<number>(20);
   const [skip, setSkip] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [paramsSearch, setParamsSearch] = useState<string>("");
   const [searchData, setSearchData] = useState<ItemType[]>([]);
-  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [hasMore, setHasMore] = useState<boolean>(false);
   const [showGoToTop, setShowGoToTop] = useState<boolean>(false);
   useEffect(() => {
     getListProduct();
@@ -37,7 +37,7 @@ function Home() {
     return res.data;
   };
   const handleLoadMore = () => {
-    setLimit((pre) => pre + 10);
+    setLimit((pre) => pre + 20);
   };
 
   useEffect(() => {
@@ -75,6 +75,7 @@ function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
+      setHasMore(true);
       setShowGoToTop(window.scrollY > 200);
     };
     window.addEventListener("scroll", handleScroll);
@@ -84,11 +85,13 @@ function Home() {
   }, []);
 
   const scrollToTop = () => {
+    setHasMore(false);
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Thêm hiệu ứng cuộn mượt
+      behavior: "smooth",
     });
   };
+  // useEffect(() => {}, []);
   return (
     <div className="App">
       <Header onSearch={handleGetParamsSearch} />
@@ -102,22 +105,26 @@ function Home() {
               next={handleLoadMore}
               hasMore={hasMore}
               loader={
-                <div className="load-wrapp">
-                  <div className="load-6">
-                    <div className="letter-holder">
-                      <div className="l-1 letter">L</div>
-                      <div className="l-2 letter">o</div>
-                      <div className="l-3 letter">a</div>
-                      <div className="l-4 letter">d</div>
-                      <div className="l-5 letter">i</div>
-                      <div className="l-6 letter">n</div>
-                      <div className="l-7 letter">g</div>
-                      <div className="l-8 letter">.</div>
-                      <div className="l-9 letter">.</div>
-                      <div className="l-10 letter">.</div>
+                !hasMore ? (
+                  <div></div>
+                ) : (
+                  <div className="load-wrapp">
+                    <div className="load-6">
+                      <div className="letter-holder">
+                        <div className="l-1 letter">L</div>
+                        <div className="l-2 letter">o</div>
+                        <div className="l-3 letter">a</div>
+                        <div className="l-4 letter">d</div>
+                        <div className="l-5 letter">i</div>
+                        <div className="l-6 letter">n</div>
+                        <div className="l-7 letter">g</div>
+                        <div className="l-8 letter">.</div>
+                        <div className="l-9 letter">.</div>
+                        <div className="l-10 letter">.</div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )
               }
             >
               <Content data={data} />
