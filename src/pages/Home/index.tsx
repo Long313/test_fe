@@ -10,6 +10,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import { IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router-dom";
+import arrow from "../../images/arrowRight.svg";
+
 
 function Home() {
   const [data, setData] = useState<ItemType[]>([]);
@@ -100,58 +102,93 @@ function Home() {
       <div className="container_app" ref={containerRef}>
         <div className="container_home_left">
           <ul>
-            <li><Link to="products/category/smartphones">Smartphone</Link></li>
-            <li><Link to="products/category/laptops">Laptop</Link></li>
-            <li><Link to="products/category/fragrances">Fragrances</Link></li>
-            <li><Link to="products/category/skincare">Skin care</Link></li>
-            <li><Link to="products/category/groceries">Groceries</Link></li>
-            <li><Link to="products/category/home-decoration">Home decoration</Link></li>
-            <li><Link to="products/category/furniture">Furniture</Link></li>
-            <li><Link to="products/category/womens-dresses">Women dress</Link></li>
-            <li><Link to="products/category/mens-shirts">Men shirt</Link></li>
-            <li><Link to="products/category/mens-shoes">Men shoes</Link></li>
-            <li><Link to="products/category/womens-watches">Women bag</Link></li>
-            <li><Link to="products/category/womens-jewellery">Women jewellery</Link></li>
-            <li><Link to="products/category/sunglasses">Sunglasses</Link></li>
-            <li><Link to="products/category/lighting">Lighting</Link></li>
+            <li>
+              <Link to="products/category/smartphones">
+                <span>Smartphone</span> 
+                <img src={arrow} alt="arrow right" />
+              </Link>
+            </li>
+            <li>
+              <Link to="products/category/laptops">Laptop</Link>
+            </li>
+            <li>
+              <Link to="products/category/fragrances">Fragrances</Link>
+            </li>
+            <li>
+              <Link to="products/category/skincare">Skin care</Link>
+            </li>
+            <li>
+              <Link to="products/category/groceries">Groceries</Link>
+            </li>
+            <li>
+              <Link to="products/category/home-decoration">
+                Home decoration
+              </Link>
+            </li>
+            <li>
+              <Link to="products/category/furniture">Furniture</Link>
+            </li>
+            <li>
+              <Link to="products/category/womens-dresses">Women dress</Link>
+            </li>
+            <li>
+              <Link to="products/category/mens-shirts">Men shirt</Link>
+            </li>
+            <li>
+              <Link to="products/category/mens-shoes">Men shoes</Link>
+            </li>
+            <li>
+              <Link to="products/category/womens-watches">Women bag</Link>
+            </li>
+            <li>
+              <Link to="products/category/womens-jewellery">
+                Women jewellery
+              </Link>
+            </li>
+            <li>
+              <Link to="products/category/sunglasses">Sunglasses</Link>
+            </li>
+            <li>
+              <Link to="products/category/lighting">Lighting</Link>
+            </li>
           </ul>
         </div>
         <div className="container_home_right">
-        {paramsSearch && searchData?.length > 0 ? (
-          <Content data={searchData} />
-        ) : (
-          <div>
-            <InfiniteScroll
-              dataLength={data.length}
-              next={handleLoadMore}
-              hasMore={hasMore}
-              loader={
-                !hasMore ? (
-                  <div></div>
-                ) : (
-                  <div className="load-wrapp">
-                    <div className="load-6">
-                      <div className="letter-holder">
-                        <div className="l-1 letter">L</div>
-                        <div className="l-2 letter">o</div>
-                        <div className="l-3 letter">a</div>
-                        <div className="l-4 letter">d</div>
-                        <div className="l-5 letter">i</div>
-                        <div className="l-6 letter">n</div>
-                        <div className="l-7 letter">g</div>
-                        <div className="l-8 letter">.</div>
-                        <div className="l-9 letter">.</div>
-                        <div className="l-10 letter">.</div>
+          {paramsSearch && searchData?.length > 0 ? (
+            <Content data={searchData} />
+          ) : (
+            <div>
+              <InfiniteScroll
+                dataLength={data.length}
+                next={handleLoadMore}
+                hasMore={hasMore}
+                loader={
+                  !hasMore ? (
+                    <div></div>
+                  ) : (
+                    <div className="load-wrapp">
+                      <div className="load-6">
+                        <div className="letter-holder">
+                          <div className="l-1 letter">L</div>
+                          <div className="l-2 letter">o</div>
+                          <div className="l-3 letter">a</div>
+                          <div className="l-4 letter">d</div>
+                          <div className="l-5 letter">i</div>
+                          <div className="l-6 letter">n</div>
+                          <div className="l-7 letter">g</div>
+                          <div className="l-8 letter">.</div>
+                          <div className="l-9 letter">.</div>
+                          <div className="l-10 letter">.</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )
-              }
-            >
-              <Content data={data} />
-            </InfiniteScroll>
-          </div>
-        )}
+                  )
+                }
+              >
+                <Content data={data} />
+              </InfiniteScroll>
+            </div>
+          )}
         </div>
         {showGoToTop && (
           <button
