@@ -1,17 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 :root {
   --primary-color: #d70018;
   --pink-color: #fee2e2;
@@ -22,5 +8,6 @@ code {
   --height-header: 60px;
   --height-path: 40px;
   --margin-detail-page: 200px;
+  --width-sidebar: 200px;
   --width-side-bar: 100px;
 }

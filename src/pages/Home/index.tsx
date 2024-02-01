@@ -1,17 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./homeStyle.css";
-import { Button } from "@mui/material";
 import { ItemType } from "../../common/type";
 import { PRODUCTS_URL_API, SEARCH_PRODUCTS_URL_API } from "../../constants";
 import { getAllProduct, searchProduct } from "../../services/api";
 import Header from "../../components/Header";
 import Content from "../../components/Content/Content";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ScrollToTopButton from "../../components/ScrollToTopButton";
 import { IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router-dom";
-import arrow from "../../images/arrowRight.svg";
-
 
 function Home() {
   const [data, setData] = useState<ItemType[]>([]);
@@ -23,7 +19,11 @@ function Home() {
   const [searchData, setSearchData] = useState<ItemType[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(false);
   const [showGoToTop, setShowGoToTop] = useState<boolean>(false);
-  console.log("dâta", data);
+  const [scrollY, setScrollY] = useState<number>(0);
+  const preScrollRef = useRef<number>(0);
+  useEffect(() => {
+    preScrollRef.current = scrollY;
+  }, [scrollY]);
   useEffect(() => {
     getListProduct();
   }, [limit]);
@@ -79,8 +79,18 @@ function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setHasMore(true);
-      setShowGoToTop(window.scrollY > 200);
+      setScrollY(window.scrollY);
+
+      if (window.scrollY > 200) {
+        setShowGoToTop(true);
+        setHasMore(true);
+      } else {
+        setHasMore(false);
+        setShowGoToTop(false);
+      }
+      if (preScrollRef.current >= window.scrollY ) {
+        setHasMore(false);
+      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -104,8 +114,7 @@ function Home() {
           <ul>
             <li>
               <Link to="products/category/smartphones">
-                <span>Smartphone</span> 
-                <img src={arrow} alt="arrow right" />
+                <span>Smartphone</span>
               </Link>
             </li>
             <li>
@@ -191,15 +200,7 @@ function Home() {
           )}
         </div>
         {showGoToTop && (
-          <button
-            // style={{
-            //   position: "fixed",
-            //   right: 20,
-            //   bottom: 20
-            // }}
-            onClick={scrollToTop}
-            className="button_go_to_top"
-          >
+          <button onClick={scrollToTop} className="button_go_to_top">
             <span>
               <IoIosArrowUp size={20} />
             </span>

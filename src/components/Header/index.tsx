@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import "./headerStyle.css";
 import useDebounce from "../../hooks/useDebounce";
-import { PRODUCTS_URL_API, SEARCH_PRODUCTS_URL_API } from "../../constants";
-import { getAllProduct } from "../../services/api";
 import { CiSearch } from "react-icons/ci";
 
 interface HeaderType {

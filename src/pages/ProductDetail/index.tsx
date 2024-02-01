@@ -43,7 +43,6 @@ export default function ProductDetail() {
     return res.data;
   };
   const handleGetParamsSearch = (searchParam: string) => {
-    console.log("search", searchParam);
   };
 
   const handleAddToCart = () => {
@@ -58,7 +57,6 @@ export default function ProductDetail() {
       theme: "light",
     });
   };
-  console.log("detail", dataDetail);
   return (
     <div>
       <Header onSearch={handleGetParamsSearch} />
@@ -67,7 +65,7 @@ export default function ProductDetail() {
           <img src={home} alt="home" className="home_img" />
         </Link>
         <Link to="/">
-          <span>Home</span>
+          <span className="home_link">Home</span>
         </Link>
         <img src={arrow} alt="arrow right" />
         <span>Product</span>
@@ -92,7 +90,7 @@ export default function ProductDetail() {
             <button onClick={handleAddToCart} className="button_add">
               <span className="text">ADD TO CART</span>
               <div className="container_icon">
-                <FaCartShopping size={20}/>
+                <FaCartShopping size={22}/>
                 <p className="add_icon">+</p>
               </div>
             </button>
@@ -104,7 +102,6 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
-      ;
     </div>
   );
 }

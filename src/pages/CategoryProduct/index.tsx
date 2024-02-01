@@ -4,7 +4,7 @@ import "./categoryProductStyle.css";
 import arrow from "../../images/arrowRight.svg";
 import home from "../../images/home.svg";
 import { useEffect, useState } from "react";
-import { ItemType } from "../../common/type";
+import { ItemType, capitalizeFirstLetter } from "../../common/type";
 import Content from "../../components/Content/Content";
 import { getListProductOfCategory } from "../../services/api";
 import { PRODUCTS_CATEGORY_URL_API } from "../../constants";
@@ -12,14 +12,15 @@ import { PRODUCTS_CATEGORY_URL_API } from "../../constants";
 function CategoryProduct() {
   const [data, setData] = useState<ItemType[]>([]);
   let { name } = useParams();
-  const handleGetParamsSearch = (searchParam: string) => {};
+  const handleGetParamsSearch = (searchParam: string) => {
+    
+  };
   useEffect(() => {
     getCategoryProduct();
   }, []);
   const getCategoryProduct = async () => {
     try {
       const data = await getListCategoryProduct(name);
-      console.log("data123", data);
       setData(data);
     } catch (err: any) {
       throw new Error(err);
@@ -37,13 +38,15 @@ function CategoryProduct() {
           <img src={home} alt="home" className="home_img" />
         </Link>
         <Link to="/">
-          <span>Home</span>
+          <span className="home_link">Home</span>
         </Link>
         <img src={arrow} alt="arrow right" />
         <span>Product</span>
         <img src={arrow} alt="arrow right" />
-        <span>{name}</span>
-        <div className="container_home_right">{data.length > 0 && <Content data={data} />}</div>
+        <span>{capitalizeFirstLetter(name)}</span>
+      </div>
+      <div className="container_home_right">
+        {data.length > 0 && <Content data={data} />}
       </div>
     </div>
   );

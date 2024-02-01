@@ -29,6 +29,11 @@
   background-color: var(--white-color);
 }
 
+.container_path a:hover .home_link {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
 .container_path img {
   height: 10px;
   margin-top: 2px;
@@ -110,13 +115,13 @@
 .container_detail_right .add_icon {
   position: absolute;
   top: -8px;
-  right: -6px;
+  right: -8px;
   border: 2px solid var(--white-color);
   background-color: var(--primary-color);
   color: var(--white-color);
   border-radius: 50%;
-  height: 16px;
-  width: 16px;
+  height: 18px;
+  width: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
