@@ -4,10 +4,11 @@ import "./categoryProductStyle.css";
 import arrow from "../../images/arrowRight.svg";
 import home from "../../images/home.svg";
 import { useEffect, useState } from "react";
-import { ItemType, capitalizeFirstLetter } from "../../common/type";
+import { ItemType } from "../../common/type";
 import Content from "../../components/Content/Content";
 import { getListProductOfCategory } from "../../services/api";
 import { PRODUCTS_CATEGORY_URL_API } from "../../constants";
+import { capitalizeFirstLetter } from "../../common";
 
 function CategoryProduct() {
   const [data, setData] = useState<ItemType[]>([]);

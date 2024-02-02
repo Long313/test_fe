@@ -23,6 +23,7 @@
   padding: 10px;
   max-height: 300px;
   height: 300px;
+  margin-top: 30px;
 }
 
 .container_content .container_item_infor a {
@@ -118,5 +119,3 @@
   margin-right: 8px;
   font-weight: 500;
 }
-
-

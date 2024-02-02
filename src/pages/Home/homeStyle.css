@@ -35,7 +35,7 @@
 .container_home_left ul a {
   font-weight: 600;
   font-size: 1.4rem;
-  padding: 10px 30px;
+  padding: 10px 30px 10px 10px;
   width: 100%;
 }
 
@@ -308,4 +308,25 @@
     background-color: #f5634a;
     width: 25px;
   }
+}
+
+.container_select {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.container_select p {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.container_select select {
+  height: 36px;
+  border-radius: 4px;
+}
+
+.container_select select option {
+  height: 36px;
 }

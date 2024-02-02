@@ -8,6 +8,7 @@ import Content from "../../components/Content/Content";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { sortListProduct } from "../../common";
 
 function Home() {
   const [data, setData] = useState<ItemType[]>([]);
@@ -20,10 +21,7 @@ function Home() {
   const [hasMore, setHasMore] = useState<boolean>(false);
   const [showGoToTop, setShowGoToTop] = useState<boolean>(false);
   const [scrollY, setScrollY] = useState<number>(0);
-  const preScrollRef = useRef<number>(0);
-  useEffect(() => {
-    preScrollRef.current = scrollY;
-  }, [scrollY]);
+  const [sortName, setSortName] = useState<string>("");
   useEffect(() => {
     getListProduct();
   }, [limit]);
@@ -69,6 +67,7 @@ function Home() {
 
   const getListSearchData = async (url: string, param: any) => {
     const res = await searchProduct(url, param);
+    console.log("res", res.data);
     return res.data.products;
   };
   useEffect(() => {
@@ -79,16 +78,11 @@ function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
-
       if (window.scrollY > 200) {
         setShowGoToTop(true);
         setHasMore(true);
-      } else {
-        setHasMore(false);
+      } else if (window.scrollY === 0) {
         setShowGoToTop(false);
-      }
-      if (preScrollRef.current >= window.scrollY ) {
         setHasMore(false);
       }
     };
@@ -105,7 +99,14 @@ function Home() {
       behavior: "smooth",
     });
   };
-  // useEffect(() => {}, []);
+
+  const handleChangeSortName = (e: Event | any) => {
+    setSortName(e.target.value);
+  };
+  useEffect(() => {
+    const newList = sortListProduct(sortName, data);
+    console.log("newList", newList);
+  }, [sortName]);
   return (
     <div className="App">
       <Header onSearch={handleGetParamsSearch} />
@@ -161,6 +162,15 @@ function Home() {
               <Link to="products/category/lighting">Lighting</Link>
             </li>
           </ul>
+          <div className="container_select">
+            <p>Sort products</p>
+            <select onChange={(e) => handleChangeSortName(e)}>
+              <option value="">Sort Item</option>
+              <option value="name">Sort by name product from A to Z</option>
+              <option value="increase">Price from low to high</option>
+              <option value="decrease">Price from hight to low</option>
+            </select>
+          </div>
         </div>
         <div className="container_home_right">
           {paramsSearch && searchData?.length > 0 ? (
